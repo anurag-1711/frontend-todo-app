@@ -1,6 +1,8 @@
 import "./App.css";
 import React, { useState, useEffect } from "react";
 
+const url = "https://backend-todo-app-nmm6.onrender.com";
+
 const App = () => {
   const [todos, setTodos] = useState([]);
   const [title, setTitle] = useState("");
@@ -10,7 +12,7 @@ const App = () => {
     getTodos();
   }, []);
   const getTodos = async () => {
-    const data = await fetch("http://localhost:3000/todos");
+    const data = await fetch(`${url}/todos`);
     const json = await data.json();
     setTodos(json);
     // console.log(todos);
@@ -18,7 +20,7 @@ const App = () => {
 
   const handleAdd = async () => {
     try {
-      const res = await fetch("http://localhost:3000/todos", {
+      const res = await fetch(`${url}/todos`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -40,7 +42,7 @@ const App = () => {
   const handleDelete = async ({ id }) => {
     try {
       // const id = todo._id;
-      const res = await fetch(`http://localhost:3000/todos/${id}`, {
+      const res = await fetch(`${url}/todos/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -56,7 +58,7 @@ const App = () => {
 
   const handleEdit = async ({ id }) => {
     try {
-      const res = await fetch(`http://localhost:3000/todos/${id}`, {
+      const res = await fetch(`${url}/todos/${id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",
